@@ -1,5 +1,5 @@
 import cors from "cors";
-import express, { type Response } from "express";
+import express, { type Request, type Response } from "express";
 import morgan from "morgan";
 import routeHandler from "./routes/index.js";
 
@@ -9,7 +9,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (res: Response) => {
+app.get("/", (_req: Request, res: Response) => {
   res.status(200).json({
     success: true,
     message: "API is running.",
