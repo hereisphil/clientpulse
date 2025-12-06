@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    // Where TS lives and where compiled JS goes
+    "rootDir": "./",
+    "outDir": "./dist",
+
+    // Node-style ESM/CJS behavior
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    // Reasonable target for Node 18/20
+    "target": "ES2022",
+    "lib": ["ES2022"],
+
+    // Node environment types
+    "types": ["node"],
+
+    // Helpful for CommonJS packages (express, mongoose, etc.)
+    "esModuleInterop": true,
+    "verbatimModuleSyntax": true,
+
+    // Debuggability & tooling
+    "sourceMap": true,
+
+    // Strictness / safety
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "skipLibCheck": true,
+    "moduleDetection": "force",
+    "isolatedModules": true
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
