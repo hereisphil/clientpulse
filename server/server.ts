@@ -4,7 +4,6 @@ import express, { type Request, type Response } from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
 import routeHandler from "./app/routes/index.js";
-
 const app = express();
 
 app.use(morgan("dev"));
@@ -22,10 +21,6 @@ app.use("/api/v1", routeHandler);
 
 const PORT = Number(process.env.PORT) || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server is running on ${PORT}`);
-});
-
 const connectDB = async () => {
   try {
     const uri = process.env.MONGODB_URI;
@@ -38,4 +33,8 @@ const connectDB = async () => {
     console.log(error);
   }
 };
-connectDB();
+await connectDB();
+
+app.listen(PORT, () => {
+  console.log(`Server is running on ${PORT}`);
+});
