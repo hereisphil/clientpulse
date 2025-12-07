@@ -1,8 +1,8 @@
 import cors from "cors";
 import "dotenv/config";
 import express, { type Request, type Response } from "express";
+import mongoose from "mongoose";
 import morgan from "morgan";
-import connectDB from "./app/db/config.js";
 import routeHandler from "./app/routes/index.js";
 
 const app = express();
@@ -20,10 +20,22 @@ app.get("/", (_req: Request, res: Response) => {
 
 app.use("/api/v1", routeHandler);
 
-connectDB();
-
 const PORT = Number(process.env.PORT) || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });
+
+const connectDB = async () => {
+  try {
+    const uri = process.env.MONGODB_URI;
+    if (!uri) {
+      throw new Error("MONGODB_URI is not defined in environment variables");
+    }
+    const conn = await mongoose.connect(uri);
+    console.log(`Connected to MongoDB successfully ${conn.connection.host}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+connectDB();
