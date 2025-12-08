@@ -1,3 +1,4 @@
+import CreateClientForm from "@/components/CreateClientForm";
 import getAllClients from "@/services/getAllClients";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
@@ -23,6 +24,7 @@ export function Dashboard() {
   return (
     <main>
       <h1>Dashboard</h1>
+      <CreateClientForm />
     </main>
   );
 }
