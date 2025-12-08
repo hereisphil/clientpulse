@@ -20,19 +20,14 @@ li {
 }
 
 main {
-  @apply py-4 grow w-full max-w-4xl m-auto flex justify-center;
-}
-
-main,
-section {
-  @apply bg-slate-900;
+  @apply p-4 grow w-full max-w-lg md:max-w-2xl lg:max-w-4xl m-auto flex justify-center;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  @apply text-slate-100 font-bold;
+  @apply font-bold;
 }
 
 h1 {
@@ -59,7 +54,7 @@ input {
 }
 
 .primary-button {
-  @apply px-4 py-2 rounded-md cursor-pointer w-30
+  @apply px-4 py-2 rounded-md cursor-pointer
     bg-emerald-400
     text-slate-950
     font-medium
