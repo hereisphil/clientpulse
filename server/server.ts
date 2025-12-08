@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import morgan from "morgan";
 import routeHandler from "./app/routes/index.js";
 const app = express();
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = Number(process.env.PORT) || 8001;
 
 app.use(morgan("dev"));
 app.use(express.json());
