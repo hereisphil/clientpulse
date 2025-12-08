@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import morgan from "morgan";
 import routeHandler from "./app/routes/index.js";
 const app = express();
+const PORT = Number(process.env.PORT) || 3000;
 
 app.use(morgan("dev"));
 app.use(express.json());
@@ -18,8 +19,6 @@ app.get("/", (_req: Request, res: Response) => {
 });
 
 app.use("/api/v1", routeHandler);
-
-const PORT = Number(process.env.PORT) || 3000;
 
 const connectDB = async () => {
   try {
