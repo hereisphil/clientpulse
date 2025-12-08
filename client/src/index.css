@@ -43,6 +43,11 @@ h1 {
   @apply text-slate-400;
 }
 
+.primary-link {
+  @apply text-emerald-400;
+  @apply hover:text-emerald-200 hover:outline-1 outline-emerald-200;
+}
+
 input,
 textarea {
   @apply bg-slate-800 border border-slate-800 rounded-md;
