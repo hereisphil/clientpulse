@@ -1,6 +1,6 @@
 export function Dashboard() {
   return (
-    <main className="grow">
+    <main>
       <h1>Dashboard</h1>
     </main>
   );

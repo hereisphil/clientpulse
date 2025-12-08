@@ -5,6 +5,8 @@ body,
 #root {
   height: 100dvh;
   width: 100%;
+  @apply bg-slate-950;
+  @apply text-slate-50;
 }
 
 #root {
@@ -15,4 +17,61 @@ body,
 
 li {
   list-style: none;
+}
+
+main {
+  @apply py-4 grow w-full max-w-4xl m-auto flex justify-center;
+}
+
+main,
+section {
+  @apply bg-slate-900;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @apply text-slate-100 font-bold;
+}
+
+h1 {
+  @apply text-3xl;
+}
+
+.muted-text {
+  @apply text-slate-400;
+}
+
+input,
+textarea {
+  @apply bg-slate-800 border border-slate-800 rounded-md;
+  @apply text-slate-100 placeholder:text-slate-500;
+}
+
+input {
+  @apply py-2 px-4;
+}
+
+.primary-button {
+  @apply px-4 py-2 rounded-md cursor-pointer w-30
+    bg-emerald-400
+    text-slate-950
+    font-medium
+    shadow-lg shadow-black/40
+    transition;
+
+  @apply hover:bg-emerald-300;
+}
+
+.secondary-button {
+  @apply px-5 py-2.5 rounded-md cursor-pointer
+    bg-slate-800
+    text-slate-100
+    font-medium
+    border border-slate-800
+    shadow-lg shadow-black/40
+    transition;
+
+  @apply hover:bg-slate-700;
 }

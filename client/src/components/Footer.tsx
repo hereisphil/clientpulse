@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer>
+    <footer className="muted-text py-8">
       &copy;2025{" "}
       <a
         href="http://github.com/hereisphil"
