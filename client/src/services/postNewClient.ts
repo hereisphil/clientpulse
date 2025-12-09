@@ -12,7 +12,7 @@ interface Client {
   notes?: string[];
 }
 
-const baseUrl: string | undefined = "http://127.0.0.1:8001/api/v1/client";
+const baseUrl = "https://clientpulse-dusky.vercel.app/api/v1";
 
 const postNewClient = async (body: Client) => {
   try {

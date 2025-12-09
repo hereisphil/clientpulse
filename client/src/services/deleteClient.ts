@@ -1,4 +1,4 @@
-const baseUrl: string | undefined = process.env.BUN_PUBLIC_BASE_URL;
+const baseUrl = "https://clientpulse-dusky.vercel.app/api/v1";
 
 const deleteClient = async (id: string) => {
   try {
