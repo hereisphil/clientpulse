@@ -75,3 +75,13 @@ input {
 
   @apply hover:bg-slate-700;
 }
+
+.ghost-button {
+  @apply px-2 py-1
+    outline outline-slate-800 rounded-md
+    bg-transparent
+    text-slate-300
+    transition;
+
+  @apply hover:bg-slate-800/70 hover:text-slate-50;
+}

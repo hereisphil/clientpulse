@@ -11,6 +11,7 @@ type ContactInfo = {
 };
 
 interface Client {
+  _id: string;
   name: string;
   status: string;
   contactInfo?: ContactInfo;
@@ -20,6 +21,7 @@ interface Client {
 
 export function Dashboard() {
   const [clients, setClients] = useState<Client[]>([]);
+  const [reload, setReload] = useState(0);
 
   useEffect(() => {
     const fetchClients = async () => {
@@ -29,7 +31,6 @@ export function Dashboard() {
 
         if (response) {
           setClients(response.clients);
-          toast.success("All clients loaded");
         } else {
           toast.error("No clients were loaded");
         }
@@ -38,13 +39,14 @@ export function Dashboard() {
       }
     };
     fetchClients();
-  }, []);
+  }, [reload]);
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: string) => {
     const response = await deleteClient(id);
     console.log("Response >>>", response);
-    if (response.ok) {
+    if (response!.ok) {
       toast.success("Successfully deleted");
+      setReload((state) => state + 1);
     } else {
       toast.error("Something went wrong");
     }
@@ -53,22 +55,30 @@ export function Dashboard() {
   return (
     <main>
       <h1>Dashboard</h1>
-      {clients.length > 0 ? (
-        clients.map((client) => (
-          <article key={client._id}>
-            Name: {client.name} Status: {client.status}
-            <button
-              onClick={() => handleDelete(client._id)}
-              className="secondary-button"
-            >
-              Delete
-            </button>
-          </article>
-        ))
-      ) : (
-        <p>No clients.</p>
-      )}
-      <CreateClientForm />
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {clients.length > 0 ? (
+          clients.map((client) => (
+            <article key={client._id} className="flex flex-col p-4">
+              <p>
+                Name: <span className="text-amber-400">{client.name}</span>
+              </p>
+              <p>
+                Status: <span className="text-amber-400">{client.status}</span>
+              </p>
+              <button
+                onClick={() => handleDelete(client._id)}
+                className="mt-4 ghost-button max-w-fit"
+              >
+                Delete
+              </button>
+            </article>
+          ))
+        ) : (
+          <p className="text-red-600 text-2xl font-bold my-6">No clients.</p>
+        )}
+      </div>
+
+      <CreateClientForm onCreation={() => setReload((state) => state + 1)} />
     </main>
   );
 }
