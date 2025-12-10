@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Route, Routes } from "react-router";
@@ -18,6 +19,7 @@ export function App() {
       <Footer />
       <Toaster />
       <SpeedInsights />
+      <Analytics />
     </BrowserRouter>
   );
 }
