@@ -57,7 +57,7 @@ export function Dashboard() {
   const handleDelete = async (id: string) => {
     const response = await deleteClient(id);
     console.log("Response >>>", response);
-    if (response!.ok) {
+    if (response) {
       toast.success("Successfully deleted");
       setReload((state) => state + 1);
     } else {

@@ -24,15 +24,12 @@ const CreateClientForm = ({ onCreation }: { onCreation: () => void }) => {
       };
 
       const response = await postNewClient(clientData);
-      if (response && response.ok) {
+      if (response) {
         toast.success("Client Added! 🥳");
         onCreation();
         clearInputs();
       } else {
-        const body = await response!.json();
-        toast.error(
-          `Client was not successful: ${body.message || JSON.stringify(body)}`
-        );
+        toast.error("Something went wrong. Client wasn't added.");
       }
     } catch (error) {
       console.log(error);

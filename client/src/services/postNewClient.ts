@@ -25,10 +25,15 @@ const postNewClient = async (body: Client) => {
       body: JSON.stringify(body),
     });
 
-    console.log("Response >>>", response);
-    return response;
+    if (response.ok) {
+      return true;
+    } else {
+      console.log("Post Response >>>", response);
+      return false;
+    }
   } catch (error) {
     console.log(error);
+    return false;
   }
 };
 

@@ -6,9 +6,15 @@ const deleteClient = async (id: string) => {
     const response = await fetch(`${baseUrl}/client/${id}`, {
       method: "DELETE",
     });
-    return response;
+    if (response.ok) {
+      return true;
+    } else {
+      console.log("Delete Response >>>", response);
+      return false;
+    }
   } catch (error) {
     console.log(error);
+    return false;
   }
 };
 
