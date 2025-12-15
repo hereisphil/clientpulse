@@ -13,10 +13,11 @@ interface Client {
 }
 
 const baseUrl = "https://clientpulse-dusky.vercel.app/api/v1";
+// const baseUrl = "http://127.0.0.1:8001/api/v1";
 
 const postNewClient = async (body: Client) => {
   try {
-    const response = await fetch(baseUrl, {
+    const response = await fetch(`${baseUrl}/client`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

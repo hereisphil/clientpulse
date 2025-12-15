@@ -20,25 +20,38 @@ interface Client {
 }
 
 export function Dashboard() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
   const [clients, setClients] = useState<Client[]>([]);
   const [reload, setReload] = useState(0);
 
   useEffect(() => {
-    const fetchClients = async () => {
+    (async () => {
+      setIsLoading(true);
+      setMessage("");
       try {
         const response = await getAllClients();
-        console.log("All Clients >>>", response);
-
-        if (response) {
-          setClients(response.clients);
+        if (!response) {
+          setClients([]);
+          return toast.error("Something went wrong. No clients loaded");
+        } else if (response === 1) {
+          setClients([]);
+          setMessage(
+            "No clients found. You may add a client with the form below."
+          );
+        } else if (response === 2) {
+          setClients([]);
+          toast.error("Something went wrong. No clients loaded");
+          setMessage("Something went wrong. No clients loaded");
         } else {
-          toast.error("No clients were loaded");
+          setClients(response.clients);
         }
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
-    };
-    fetchClients();
+    })();
   }, [reload]);
 
   const handleDelete = async (id: string) => {
@@ -55,8 +68,16 @@ export function Dashboard() {
   return (
     <main>
       <h1>Dashboard</h1>
+      {isLoading && (
+        <p className="text-amber-400 text-2xl font-bold my-6">
+          Loading clients...
+        </p>
+      )}
+      {message && (
+        <p className="text-red-600 text-2xl font-bold my-6">{message}</p>
+      )}
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {clients.length > 0 ? (
+        {clients &&
           clients.map((client) => (
             <article key={client._id} className="flex flex-col p-4">
               <p>
@@ -72,10 +93,7 @@ export function Dashboard() {
                 Delete
               </button>
             </article>
-          ))
-        ) : (
-          <p className="text-red-600 text-2xl font-bold my-6">No clients.</p>
-        )}
+          ))}
       </div>
 
       <CreateClientForm onCreation={() => setReload((state) => state + 1)} />
