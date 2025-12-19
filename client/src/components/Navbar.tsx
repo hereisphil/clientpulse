@@ -3,6 +3,8 @@ import { Link } from "react-router";
 const navlinks = [
   { path: "/", title: "Home" },
   { path: "/dashboard", title: "Dashboard" },
+  { path: "/login", title: "Login" },
+  { path: "/signup", title: "Signup" },
 ];
 
 const Navbar = () => {
