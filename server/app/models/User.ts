@@ -1,5 +1,5 @@
-import bcrypt from "bcrypt-nodejs";
-import { Schema, model, type HydratedDocument } from "mongoose";
+import bcrypt from "bcryptjs";
+import { Schema, model, type Model } from "mongoose";
 
 type User = {
   email: string;
@@ -10,7 +10,8 @@ type UserMethods = {
   comparePassword(candidatePassword: string): Promise<boolean>;
 };
 
-type UserDoc = HydratedDocument<User, UserMethods>;
+// Model type that includes methods
+type UserModel = Model<User, {}, UserMethods>;
 
 const userSchema = new Schema<User, {}, UserMethods>(
   {
@@ -33,51 +34,42 @@ const userSchema = new Schema<User, {}, UserMethods>(
 );
 
 userSchema.pre("save", async function () {
-  const user = this as UserDoc;
+  const user = this;
 
   if (!user.isNew && !user.isModified("password")) return;
-  if (!user.password) return; // safety: nothing to hash
+  if (!user.password) return;
 
   const salt = await new Promise<string>((resolve, reject) => {
-    bcrypt.genSalt(10, (error: Error | null, salt: string) => {
-      if (error) reject(error);
-      else resolve(salt);
+    bcrypt.genSalt(10, (error, salt) => {
+      if (error) return reject(error);
+      if (!salt) return reject(new Error("bcrypt salt was undefined"));
+      resolve(salt);
     });
   });
 
   const hash = await new Promise<string>((resolve, reject) => {
-    bcrypt.hash(
-      user.password as string,
-      salt,
-      null,
-      (error: Error | null, hash: string) => {
-        if (error) reject(error);
-        else resolve(hash);
-      }
-    );
+    bcrypt.hash(user.password as string, salt, (error, hash) => {
+      if (error) reject(error);
+      else resolve(hash!);
+    });
   });
 
   user.password = hash;
 });
 
 userSchema.methods.comparePassword = function (candidatePassword: string) {
-  const user = this as UserDoc;
+  const user = this;
 
   return new Promise<boolean>((resolve, reject) => {
     // if password missing for any reason, fail safely
     if (!user.password) return resolve(false);
 
-    bcrypt.compare(
-      candidatePassword,
-      user.password,
-      (error: Error | null, isMatch: boolean) => {
-        if (error) return reject(error);
-        resolve(isMatch);
-      }
-    );
+    bcrypt.compare(candidatePassword, user.password, (error, isMatch) => {
+      if (error) return reject(error);
+      resolve(Boolean(isMatch));
+    });
   });
 };
 
-const UserModel = model("User", userSchema);
-// const UserModel = model<User, {}, UserMethods>("User", userSchema);
+const UserModel = model<User, UserModel>("User", userSchema);
 export default UserModel;

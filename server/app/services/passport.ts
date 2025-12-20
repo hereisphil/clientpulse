@@ -4,7 +4,10 @@ import {
   Strategy as JwtStrategy,
   type VerifiedCallback,
 } from "passport-jwt";
-import { Strategy as LocalStrategy } from "passport-local";
+import {
+  Strategy as LocalStrategy,
+  type IStrategyOptions,
+} from "passport-local";
 import config from "../../config.ts";
 import UserModel from "../models/User.ts";
 
@@ -13,14 +16,15 @@ type JwtPayload = {
   iat: number;
 };
 
-const localOptions = {
+const localOptions: IStrategyOptions = {
   usernameField: "email",
+  passReqToCallback: false,
 };
 
 // Local strategy (email + password)
 const localStrategy = new LocalStrategy(
   localOptions,
-  async (email: string, password: string, done: VerifiedCallback) => {
+  async (email, password, done) => {
     try {
       const user = await UserModel.findOne({ email });
 
@@ -29,9 +33,9 @@ const localStrategy = new LocalStrategy(
       const matched = await user.comparePassword(password);
       if (!matched) return done(null, false);
 
-      return done(null, user);
+      return done(null, user as any); // see note below
     } catch (err) {
-      return done(err, false);
+      return done(err as any, false);
     }
   }
 );
