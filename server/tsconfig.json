@@ -22,6 +22,10 @@
     // Debuggability & tooling
     "sourceMap": true,
 
+    // EXTRA
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+
     // Strictness / safety
     "strict": true,
     "noUncheckedIndexedAccess": true,
