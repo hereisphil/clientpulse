@@ -3,7 +3,8 @@ import "dotenv/config";
 import express, { type Request, type Response } from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
-import routeHandler from "./app/routes/index.js";
+import routeHandler from "./app/routes/index.ts";
+
 const app = express();
 const PORT = Number(process.env.PORT) || 8001;
 
