@@ -3,9 +3,7 @@ import jwt from "jwt-simple";
 import config from "../../config.ts";
 import User from "../models/User.ts";
 
-type AuthUser = { _id: string };
-
-const tokenForUser = (user: AuthUser) => {
+const tokenForUser = (user: { _id: string }) => {
   const timestamp = new Date().getTime();
   return jwt.encode(
     {
@@ -17,11 +15,15 @@ const tokenForUser = (user: AuthUser) => {
 };
 
 export const signin = (req: Request, res: Response) => {
-  if (!req.user) {
+  const user = req.user;
+  if (!user) {
     return res.status(401).json({ error: "Not authorized" });
   }
 
-  return res.send({ token: tokenForUser(req.user), user_id: req.user._id });
+  return res.status(200).json({
+    user_id: user._id,
+    token: tokenForUser({ _id: user._id }),
+  });
 };
 
 export const signup = async (

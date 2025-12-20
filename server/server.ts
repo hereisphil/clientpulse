@@ -3,7 +3,9 @@ import "dotenv/config";
 import express, { type Request, type Response } from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
+import passport from "passport";
 import routeHandler from "./app/routes/index.ts";
+import passportService from "./app/services/passport.ts";
 
 const app = express();
 const PORT = Number(process.env.PORT) || 8001;
@@ -11,6 +13,8 @@ const PORT = Number(process.env.PORT) || 8001;
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cors());
+app.use(passport.initialize());
+passportService();
 
 app.get("/", (_req: Request, res: Response) => {
   res.status(200).json({
