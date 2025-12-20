@@ -79,4 +79,5 @@ userSchema.methods.comparePassword = function (candidatePassword: string) {
 };
 
 const UserModel = model("User", userSchema);
+// const UserModel = model<User, {}, UserMethods>("User", userSchema);
 export default UserModel;

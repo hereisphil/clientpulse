@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import mongoose from "mongoose";
-import Client from "../models/Client.js";
+import Client from "../models/Client.ts";
 
 /* -------------------------------------------------------------------------- */
 /*                              POST: New Client                              */

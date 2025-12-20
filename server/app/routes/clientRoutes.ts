@@ -5,7 +5,7 @@ import {
   getAllClients,
   getClientById,
   updateClient,
-} from "../controller/clientController.js";
+} from "../controllers/clientController.ts";
 const router = Router();
 
 router.post("/", createClient);
