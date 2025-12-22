@@ -33,7 +33,7 @@ const localStrategy = new LocalStrategy(
       const matched = await user.comparePassword(password);
       if (!matched) return done(null, false);
 
-      return done(null, user as any); // see note below
+      return done(null, user as any);
     } catch (err) {
       return done(err as any, false);
     }

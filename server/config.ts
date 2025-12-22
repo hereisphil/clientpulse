@@ -1,5 +1,4 @@
-const config = {
-  secret: process.env.JWT_SECRET as string,
-};
+const secret = process.env.JWT_SECRET;
+if (!secret) throw new Error("JWT_SECRET is missing");
 
-export default config;
+export default { secret };
