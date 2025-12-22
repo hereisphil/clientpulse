@@ -1,12 +1,12 @@
 import type { User } from "@/types/User";
 
-const getCurrentUser = (): User | undefined => {
+const getCurrentUser = (): User | null => {
   try {
     const storedUser = localStorage.getItem("user");
-    if (!storedUser) return undefined;
+    if (!storedUser) return null;
     return JSON.parse(storedUser);
   } catch {
-    return undefined;
+    return null;
   }
 };
 
