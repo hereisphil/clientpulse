@@ -7,7 +7,7 @@ type signupResponse = {
   email?: string;
 };
 
-const signup = async ({
+const signupUser = async ({
   email,
   password,
 }: {
@@ -36,4 +36,4 @@ const signup = async ({
   }
 };
 
-export default signup;
+export default signupUser;

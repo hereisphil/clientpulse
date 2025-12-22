@@ -1,3 +1,4 @@
+import signupUser from "@/services/auth/signupUser";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
@@ -11,11 +12,13 @@ export function Signup() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setIsLoading(true);
+    const user = {
+      email,
+      password,
+    };
     try {
-      // const response = await login({ email, password });
-      // if (!response) throw new Error();
-      // setAuthUser(response);
-      console.log(email, password);
+      const response = await signupUser(user);
+      if (!response) throw new Error();
       toast.success("Welcome! You've signed up!");
       navigate("/dashboard");
     } catch (error) {
