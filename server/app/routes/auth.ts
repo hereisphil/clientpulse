@@ -1,6 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
-import { signin, signup } from "../controllers/authController.ts";
+import { signin, signup } from "../controllers/authController.js";
 
 const requireLogin = passport.authenticate("local", { session: false });
 

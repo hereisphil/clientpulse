@@ -5,8 +5,8 @@ import {
   getAllClients,
   getClientById,
   updateClient,
-} from "../controllers/clientController.ts";
-import { requireAuth } from "../middleware/requireAuth.ts";
+} from "../controllers/clientController.js";
+import { requireAuth } from "../middleware/requireAuth.js";
 const router = Router();
 
 // All client routes are now protected via middleware

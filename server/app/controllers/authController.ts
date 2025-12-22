@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import jwt from "jwt-simple";
-import config from "../../config.ts";
-import User from "../models/User.ts";
+import config from "../../config.js";
+import User from "../models/User.js";
 
 const tokenForUser = (user: { _id: string }) => {
   const timestamp = new Date().getTime();

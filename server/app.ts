@@ -3,8 +3,8 @@ import "dotenv/config";
 import express from "express";
 import morgan from "morgan";
 import passport from "passport";
-import routeHandler from "./app/routes/index.ts";
-import passportService from "./app/services/passport.ts";
+import routeHandler from "./app/routes/index.js";
+import passportService from "./app/services/passport.js";
 
 const app = express();
 

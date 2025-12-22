@@ -1,6 +1,6 @@
 import express, { type Request, type Response } from "express";
-import authRoutes from "./auth.ts";
-import clientRoutes from "./clientRoutes.ts";
+import authRoutes from "./auth.js";
+import clientRoutes from "./clientRoutes.js";
 const router = express.Router();
 
 router.get("/", (req: Request, res: Response) => {

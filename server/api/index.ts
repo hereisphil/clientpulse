@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import mongoose from "mongoose";
-import app from "../app.ts";
+import app from "../app.js";
 
 let cached = (global as any).mongooseConn as typeof mongoose | null;
 

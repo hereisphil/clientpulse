@@ -8,8 +8,8 @@ import {
   Strategy as LocalStrategy,
   type IStrategyOptions,
 } from "passport-local";
-import config from "../../config.ts";
-import UserModel from "../models/User.ts";
+import config from "../../config.js";
+import UserModel from "../models/User.js";
 
 type JwtPayload = {
   sub: string;
