@@ -8,7 +8,7 @@ import routeHandler from "./app/routes/index.ts";
 import passportService from "./app/services/passport.ts";
 
 const app = express();
-const PORT = Number(process.env.PORT) || 8001;
+// const PORT = Number(process.env.PORT) || 8001;
 
 app.use(morgan("dev"));
 app.use(express.json());
@@ -39,6 +39,4 @@ const connectDB = async () => {
 };
 await connectDB();
 
-app.listen(PORT, () => {
-  console.log(`Server is running on ${PORT}`);
-});
+// app.listen(PORT, () => {console.log(`Server is running on ${PORT}`);});
