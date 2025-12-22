@@ -4,7 +4,7 @@ const authHeader = () => {
     if (!storedUser) return undefined;
     const user = JSON.parse(storedUser);
     if (user && user.token) {
-      return { Authorization: user.token };
+      return { Authorization: `Bearer ${user.token}` };
     } else {
       return undefined;
     }

@@ -24,6 +24,7 @@ export function Dashboard() {
   const [message, setMessage] = useState("");
   const [clients, setClients] = useState<Client[]>([]);
   const [reload, setReload] = useState(0);
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -33,23 +34,38 @@ export function Dashboard() {
         const response = await getAllClients();
         if (!response) {
           setClients([]);
+          setIsAuthorized(false);
           return toast.error("Something went wrong. No clients loaded");
+        } else if (response === 401) {
+          setClients([]);
+          setIsAuthorized(false);
+          setMessage("You haven't been authenticated. Please login");
+          toast.error("You haven't been authenticated. Please login");
+          return;
         } else if (response === 1) {
+          setIsAuthorized(true);
           setClients([]);
           setMessage(
             "No clients found. You may add a client with the form below."
           );
+          return;
         } else if (response === 2) {
+          setIsAuthorized(true);
           setClients([]);
           toast.error("Something went wrong. No clients loaded");
           setMessage("Something went wrong. No clients loaded");
+          return;
         } else {
+          setIsAuthorized(true);
           setClients(response.clients);
+          return;
         }
       } catch (error) {
         console.log(error);
+        return;
       } finally {
         setIsLoading(false);
+        return;
       }
     })();
   }, [reload]);
@@ -64,6 +80,17 @@ export function Dashboard() {
       toast.error("Something went wrong");
     }
   };
+
+  if (!isAuthorized) {
+    return (
+      <main>
+        <h1>Dashboard</h1>
+        {message && (
+          <p className="text-red-600 text-2xl font-bold my-6">{message}</p>
+        )}
+      </main>
+    );
+  }
 
   return (
     <main>

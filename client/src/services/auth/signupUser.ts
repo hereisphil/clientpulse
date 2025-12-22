@@ -1,4 +1,5 @@
-const baseUrl = "https://clientpulse-dusky.vercel.app/api/v1";
+// const baseUrl = "https://clientpulse-dusky.vercel.app/api/v1";
+const baseUrl = "http://127.0.0.1:8001/api/v1";
 
 // Specify the type of Promise Response I'm looking for:
 type signupResponse = {

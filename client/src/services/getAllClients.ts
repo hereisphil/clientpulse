@@ -1,7 +1,7 @@
 import authHeader from "./auth/authHeader";
 
-const baseUrl = "https://clientpulse-dusky.vercel.app/api/v1";
-// const baseUrl = "http://127.0.0.1:8001/api/v1";
+// const baseUrl = "https://clientpulse-dusky.vercel.app/api/v1";
+const baseUrl = "http://127.0.0.1:8001/api/v1";
 
 const getAllClients = async () => {
   try {
@@ -15,6 +15,8 @@ const getAllClients = async () => {
         return 1;
       }
       return body;
+    } else if (response.status === 401) {
+      return 401;
     } else {
       return 2;
     }
