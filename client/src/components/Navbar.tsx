@@ -1,4 +1,6 @@
-import { Link } from "react-router";
+import logoutUser from "@/services/auth/logoutUser";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router";
 
 const navlinks = [
   { path: "/", title: "Home" },
@@ -8,6 +10,14 @@ const navlinks = [
 ];
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logoutUser();
+    navigate("/");
+    toast.success("Successfully logged out.");
+  };
+
   return (
     <header className="w-full p-4 flex justify-between place-items-center border-b-2 border-slate-800">
       <h2 className="text-2xl">
@@ -21,6 +31,12 @@ const Navbar = () => {
             <Link to={link.path}>{link.title}</Link>
           </li>
         ))}
+        <button
+          className="cursor-pointer px-2 rounded-md text-l hover:outline hover:text-red-500"
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
       </nav>
     </header>
   );
