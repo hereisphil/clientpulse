@@ -32,6 +32,7 @@ export function Login() {
     <main>
       <section className="flex flex-col items-center">
         <h1>Login</h1>
+        <h2 className="text-red-400">non-function example page</h2>
         <form
           onSubmit={handleSubmit}
           className="flex flex-col justify-center max-w-fit"
